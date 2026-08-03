@@ -1,0 +1,702 @@
+# J-ROC OS — Complete Operating System for Business Automation
+
+**Repository:** `github.com/jroc-os/core`  
+**Status:** v4.1.2 production, v5.0 in development  
+**License:** MIT  
+**Latest Release:** [v4.1.2](https://github.com/jroc-os/core/releases/tag/v4.1.2)
+
+---
+
+## 🎯 What is J-ROC OS?
+
+A complete operating system for autonomous business operation. Deploy AI agents to:
+- Close revenue autonomously (SDRs, Setters)
+- Run support 24/7 (Support Agents)
+- Maintain quality (QA Managers)
+- Generate insights (Reporting Analysts)
+- Coordinate everything (JROC Commander)
+
+**Current State:** Core infrastructure complete, autonomous revenue engine functional, AI employee system in development.
+
+---
+
+## 📊 Version Roadmap
+
+| Version | Name | Status | ETA | Primary Feature |
+|---------|------|--------|-----|-----------------|
+| v1.0 | OS Foundation | ✅ Released | - | Core architecture, API framework |
+| v2.0 | CRM Foundation | ✅ Released | - | Pipeline, contacts, deals |
+| v3.0 | AI Revenue | ✅ Released | - | LLM integration, prompts |
+| v4.0 | Autonomous Revenue | ✅ Released | - | SDR agent, email integration |
+| v4.1 | Revenue Patches | ✅ Released | - | Reliability, performance |
+| v5.0 | AI Employee System | 🔄 In Progress | 4 weeks | Executable workers, task mgmt |
+| v6.0 | Automation OS | 📅 Planned | 8 weeks | Triggers, workflows, webhooks |
+| v7.0 | Client Portal | 📅 Planned | 12 weeks | White-label customer interface |
+| v8.0 | Proposals + Contracts | 📅 Planned | 16 weeks | Document generation, e-sign |
+| v9.0 | Finance OS | 📅 Planned | 20 weeks | Invoicing, accounting, reporting |
+| v10.0 | Marketplace | 📅 Planned | 24 weeks | Agent templates, integrations |
+| v11.0 | Launch | 📅 Planned | 28 weeks | Public release prep |
+| v12.0 | Full J-ROC OS | 🎯 Target | 32 weeks | Complete autonomous business |
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     JROC COMMANDER                       │
+│         (Orchestration, Scheduling, Monitoring)         │
+├─────────────────────────────────────────────────────────┤
+│                                                           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  AI Agents   │  │  Automation  │  │  Database    │  │
+│  │  Framework   │  │  Engine      │  │  Layer       │  │
+│  └──────────────┘  └──────────────┘  └──────────────┘  │
+│                                                           │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │         REST API / GraphQL / WebSocket            │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  Frontend    │  │  Mobile      │  │  Integrations│  │
+│  │  Dashboard   │  │  App         │  │  (100+)      │  │
+│  └──────────────┘  └──────────────┘  └──────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📁 Repository Structure
+
+```
+jroc-os/
+│
+├── 📦 apps/
+│   ├── api/                 # Backend API (Node.js/Express)
+│   │   ├── src/
+│   │   │   ├── agents/      # AI agent framework
+│   │   │   ├── api/         # REST/GraphQL endpoints
+│   │   │   ├── automation/  # Trigger & workflow engine
+│   │   │   ├── db/          # Database layer
+│   │   │   ├── integrations/# 100+ service integrations
+│   │   │   ├── auth/        # Authentication & RLS
+│   │   │   └── commander/   # Orchestration engine
+│   │   ├── migrations/      # Database migrations
+│   │   ├── Dockerfile
+│   │   └── package.json
+│   │
+│   ├── web/                 # Frontend Dashboard (React)
+│   │   ├── src/
+│   │   │   ├── pages/       # Route pages
+│   │   │   ├── components/  # UI components
+│   │   │   ├── hooks/       # Custom React hooks
+│   │   │   ├── store/       # State management (Redux)
+│   │   │   ├── services/    # API clients
+│   │   │   └── styles/      # Tailwind + custom CSS
+│   │   ├── Dockerfile
+│   │   └── package.json
+│   │
+│   └── mobile/              # React Native app
+│       └── (Planned for v7.0+)
+│
+├── 🧠 packages/
+│   ├── agents/              # AI agent SDK
+│   │   ├── src/
+│   │   │   ├── base-agent.ts       # Base agent class
+│   │   │   ├── tools/              # Agent tools
+│   │   │   ├── memory/             # Agent memory system
+│   │   │   ├── skills/             # Predefined skills
+│   │   │   ├── sdr-agent/          # Sales Dev Rep
+│   │   │   ├── setter-agent/       # Meeting Setter
+│   │   │   ├── support-agent/      # Customer Support
+│   │   │   ├── qa-agent/           # QA Manager
+│   │   │   ├── analyst-agent/      # Reporting Analyst
+│   │   │   └── commander/          # JROC Commander
+│   │   └── package.json
+│   │
+│   ├── database/            # Database client & schemas
+│   │   ├── schema/          # TypeScript schema types
+│   │   ├── migrations/      # SQL migrations
+│   │   └── package.json
+│   │
+│   └── shared/              # Shared utilities
+│       ├── types/           # TypeScript types
+│       ├── utils/           # Common utilities
+│       └── package.json
+│
+├── 🔧 infrastructure/
+│   ├── docker-compose.yml   # Local dev environment
+│   ├── kubernetes/          # K8s manifests (production)
+│   ├── terraform/           # AWS/GCP infrastructure
+│   └── scripts/             # Deployment scripts
+│
+├── 📚 docs/
+│   ├── ARCHITECTURE.md      # System design
+│   ├── VERSIONS.md          # Version details
+│   ├── API.md               # API documentation
+│   ├── AGENTS.md            # Agent framework docs
+│   ├── DEPLOYMENT.md        # Deployment guide
+│   └── ROADMAP.md           # Future plans
+│
+├── 🧪 tests/
+│   ├── unit/                # Unit tests
+│   ├── integration/         # Integration tests
+│   └── e2e/                 # End-to-end tests
+│
+├── .github/
+│   ├── workflows/           # CI/CD pipelines
+│   └── ISSUE_TEMPLATE/      # Issue templates
+│
+├── docker-compose.yml
+├── .env.example
+├── package.json             # Monorepo root
+├── tsconfig.json
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Docker & Docker Compose
+- PostgreSQL 14+
+- Git
+
+### Local Development Setup
+
+```bash
+# 1. Clone repository
+git clone https://github.com/jroc-os/core.git
+cd jroc-os
+
+# 2. Install dependencies
+npm install
+
+# 3. Setup environment
+cp .env.example .env
+# Edit .env with your config
+
+# 4. Start services (PostgreSQL, Redis, API, Web)
+docker-compose up -d
+
+# 5. Run migrations
+npm run db:migrate
+
+# 6. Seed data
+npm run db:seed
+
+# 7. Start dev servers
+npm run dev
+
+# Frontend: http://localhost:3000
+# API: http://localhost:4000
+# GraphQL: http://localhost:4000/graphql
+```
+
+---
+
+## 📦 Installation & Deployment
+
+### Docker (Recommended)
+
+```bash
+# Build production images
+docker build -t jroc-api:latest ./apps/api
+docker build -t jroc-web:latest ./apps/web
+
+# Run with docker-compose
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Kubernetes
+
+```bash
+# Deploy to K8s cluster
+kubectl apply -f infrastructure/kubernetes/
+kubectl rollout status deployment/jroc-api
+```
+
+### NPM Package (For SDK Use)
+
+```bash
+npm install @jroc-os/agents
+npm install @jroc-os/database
+```
+
+---
+
+## 🧠 AI Agent Framework
+
+### Creating a Custom Agent
+
+```typescript
+import { BaseAgent, Tool, AgentTask } from '@jroc-os/agents';
+import { Anthropic } from '@anthropic-ai/sdk';
+
+class CustomSalesAgent extends BaseAgent {
+  constructor() {
+    super({
+      id: 'custom-sales-agent',
+      name: 'Custom Sales Agent',
+      model: 'claude-3-5-sonnet-20241022',
+      maxTokens: 4096,
+      temperature: 0.7,
+    });
+  }
+
+  // Define tools this agent can use
+  protected initializeTools(): Tool[] {
+    return [
+      {
+        name: 'send_email',
+        description: 'Send an email to a prospect',
+        execute: async (params) => this.emailService.send(params),
+      },
+      {
+        name: 'search_company',
+        description: 'Search company info',
+        execute: async (params) => this.companyService.search(params),
+      },
+      {
+        name: 'log_activity',
+        description: 'Log activity in CRM',
+        execute: async (params) => this.crmService.logActivity(params),
+      },
+    ];
+  }
+
+  // Define agent system prompt
+  protected getSystemPrompt(): string {
+    return `You are an expert sales development representative. Your job is to:
+1. Research prospects
+2. Send personalized outreach emails
+3. Track all interactions in the CRM
+4. Always maintain professionalism and compliance`;
+  }
+}
+
+// Use agent
+const agent = new CustomSalesAgent();
+const task = new AgentTask({
+  type: 'outreach',
+  prospect: 'john@company.com',
+  company: 'Acme Corp',
+});
+
+const result = await agent.execute(task);
+console.log(result.status); // 'completed' | 'escalated' | 'failed'
+```
+
+---
+
+## 🔄 Automation Engine
+
+### Creating a Workflow
+
+```typescript
+import { Workflow, Trigger, Condition, Action } from '@jroc-os/automation';
+
+const leadQualificationWorkflow = new Workflow({
+  id: 'lead-qualification',
+  name: 'Auto Qualify Leads',
+  description: 'Automatically qualify and assign leads',
+  enabled: true,
+  triggers: [
+    {
+      type: 'lead_created',
+      filter: { source: 'website_form' },
+    },
+  ],
+  conditions: [
+    {
+      field: 'company_revenue',
+      operator: 'gte',
+      value: 10000000, // $10M+
+    },
+  ],
+  actions: [
+    {
+      type: 'send_email_sequence',
+      agentId: 'sdr-agent',
+      sequenceId: 'welcome-sequence',
+    },
+    {
+      type: 'assign_owner',
+      assignTo: 'sales_team',
+    },
+    {
+      type: 'create_task',
+      taskType: 'follow_up',
+      dueIn: 'P1D', // 1 day
+    },
+  ],
+});
+
+await workflow.deploy();
+```
+
+---
+
+## 📊 Commander Orchestration
+
+### Monitor & Control All Agents
+
+```typescript
+import { Commander } from '@jroc-os/commander';
+
+const commander = new Commander();
+
+// Check agent status
+const agentStatus = await commander.getAgentStatus('sdr-agent');
+console.log({
+  agentId: agentStatus.id,
+  status: agentStatus.status, // 'running' | 'paused' | 'error'
+  tasksCompleted: agentStatus.tasksCompleted,
+  uptime: agentStatus.uptime,
+  memory: agentStatus.memory,
+});
+
+// Scale agent
+await commander.scaleAgent('sdr-agent', {
+  instances: 5, // Run 5 parallel instances
+  concurrency: 10, // Each handles 10 tasks
+});
+
+// View agent metrics
+const metrics = await commander.getAgentMetrics('sdr-agent', {
+  period: '7d',
+  metrics: ['task_completion', 'error_rate', 'latency'],
+});
+
+// Broadcast command to all agents
+await commander.broadcast({
+  command: 'update_knowledge',
+  data: { competitorInfo: [...] },
+});
+
+// Get system health
+const systemHealth = await commander.getSystemHealth();
+console.log({
+  agentsRunning: systemHealth.agentsRunning,
+  tasksQueued: systemHealth.tasksQueued,
+  totalThroughput: systemHealth.totalThroughput,
+  cpuUsage: systemHealth.cpuUsage,
+  memoryUsage: systemHealth.memoryUsage,
+});
+```
+
+---
+
+## 💾 Database Schema
+
+### Core Tables (v1-v4)
+
+```sql
+-- Organizations
+CREATE TABLE organizations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(255) NOT NULL,
+  domain VARCHAR(255) UNIQUE,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Contacts (CRM)
+CREATE TABLE contacts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID REFERENCES organizations(id),
+  email VARCHAR(255) UNIQUE,
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  company VARCHAR(255),
+  phone VARCHAR(20),
+  status VARCHAR(50), -- 'lead', 'opportunity', 'customer'
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Deals/Pipeline
+CREATE TABLE deals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID REFERENCES organizations(id),
+  contact_id UUID REFERENCES contacts(id),
+  amount DECIMAL(12,2),
+  stage VARCHAR(50), -- 'prospecting', 'proposal', 'negotiation', 'closed'
+  expected_close_date DATE,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Agent Runs (v5+)
+CREATE TABLE agent_runs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID REFERENCES organizations(id),
+  agent_id VARCHAR(255),
+  task_type VARCHAR(100),
+  status VARCHAR(50), -- 'running', 'completed', 'failed', 'escalated'
+  input JSONB,
+  output JSONB,
+  error TEXT,
+  duration_ms INTEGER,
+  created_at TIMESTAMP DEFAULT now()
+);
+
+-- Automation Executions
+CREATE TABLE automation_executions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID REFERENCES organizations(id),
+  workflow_id UUID,
+  trigger_type VARCHAR(100),
+  status VARCHAR(50),
+  actions_taken JSONB,
+  created_at TIMESTAMP DEFAULT now()
+);
+
+-- Agent Tasks (v5+)
+CREATE TABLE agent_tasks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID REFERENCES organizations(id),
+  agent_id VARCHAR(255),
+  task_type VARCHAR(100),
+  status VARCHAR(50),
+  priority VARCHAR(20),
+  assigned_to VARCHAR(255),
+  due_date TIMESTAMP,
+  completed_at TIMESTAMP,
+  result JSONB,
+  created_at TIMESTAMP DEFAULT now()
+);
+```
+
+---
+
+## 📈 Current Status: v4.1.2
+
+### ✅ Completed Features
+
+**v1.0 - OS Foundation**
+- Core API framework (Express.js)
+- Authentication & RBAC
+- Database layer (Supabase/PostgreSQL)
+- Basic webhook system
+
+**v2.0 - CRM Foundation**
+- Contact management
+- Deal/Pipeline tracking
+- Activity logging
+- Basic reporting
+
+**v3.0 - AI Revenue**
+- LLM integration (Claude)
+- Prompt management
+- Token counting & cost tracking
+- Basic agent scaffolding
+
+**v4.0 - Autonomous Revenue Engine**
+- SDR Agent (prospecting, email, follow-up)
+- Email integration (Gmail, Outlook)
+- Lead scoring
+- Campaign management
+- Email sequence automation
+
+**v4.1 - Revenue Patches**
+- Performance optimizations
+- Bug fixes & reliability
+- Rate limiting & throttling
+- Error recovery
+
+---
+
+## 🔄 In Progress: v5.0 — AI Employee System
+
+### Features Under Development
+
+**Task Management System**
+- Persistent task queue
+- Priority and scheduling
+- Retry logic and deadletter queue
+- Task history and audit
+
+**Executable Worker Framework**
+- AI SDR (complete rewrite)
+- AI Setter (new)
+- AI Support (new)
+- AI QA Manager (new)
+- AI Reporting Analyst (new)
+- JROC Commander (enhanced)
+
+**Worker Features**
+- Real-time status monitoring
+- Worker scaling
+- Skill/permission management
+- Tool access control
+- Performance metrics
+
+**Testing**
+- Unit tests (40% coverage)
+- Integration tests (30% coverage)
+- E2E tests (20% coverage)
+
+---
+
+## ❓ What's Missing (Roadmap Gaps)
+
+### v5.0 Gaps (Current)
+- [ ] Worker clustering (scale across servers)
+- [ ] Advanced memory management (long-term context)
+- [ ] Multi-turn conversations
+- [ ] Real-time agent status dashboard
+- [ ] Worker performance analytics
+- [ ] Tool permission matrix
+
+### v6.0 (Automation OS)
+- [ ] Visual workflow builder
+- [ ] Trigger library (100+ triggers)
+- [ ] Conditional logic engine
+- [ ] Queue management (Kafka/RabbitMQ)
+- [ ] Scheduled jobs (cron)
+- [ ] Webhook management
+- [ ] Error handling & retries
+
+### v7.0 (Client Portal)
+- [ ] White-label interface
+- [ ] Custom branding
+- [ ] Multi-tenant support
+- [ ] Client self-service
+- [ ] Client reporting
+- [ ] Agent visibility controls
+
+### v8.0 (Proposals + Contracts)
+- [ ] Template builder
+- [ ] Dynamic content generation
+- [ ] E-signature integration (DocuSign)
+- [ ] Version control
+- [ ] Approval workflows
+- [ ] Contract analysis AI
+
+### v9.0 (Finance OS)
+- [ ] Invoicing
+- [ ] Payment processing
+- [ ] Accounting sync (Xero, QuickBooks)
+- [ ] Financial reporting
+- [ ] Tax compliance
+- [ ] Subscription management
+
+### v10.0 (Marketplace)
+- [ ] Agent templates
+- [ ] Integration library (100+)
+- [ ] Plugin system
+- [ ] Community marketplace
+- [ ] Monetization
+
+### v11.0-v12.0 (Launch)
+- [ ] Public documentation
+- [ ] Community forum
+- [ ] SaaS platform
+- [ ] Mobile app
+- [ ] Advanced analytics
+
+---
+
+## 🔐 Security
+
+### Features
+- ✅ Row-level security (RLS)
+- ✅ JWT authentication
+- ✅ API key management
+- ✅ Audit logging
+- ✅ Encryption at rest & in transit
+- ✅ RBAC (Role-based access control)
+- ✅ GDPR compliance
+
+### Compliance
+- SOC 2 Type II (roadmap)
+- HIPAA (if applicable)
+- GDPR data export
+- CCPA compliance
+
+---
+
+## 📡 Integrations (100+)
+
+### CRM
+- Salesforce, HubSpot, Pipedrive, etc.
+
+### Email
+- Gmail, Outlook, Sendgrid
+
+### Communication
+- Slack, Teams, Discord
+
+### Payments
+- Stripe, PayPal, Braintree
+
+### Analytics
+- Mixpanel, Amplitude
+
+### More...
+See `docs/INTEGRATIONS.md` for full list
+
+---
+
+## 🤝 Contributing
+
+### Development Process
+
+1. **Fork** the repository
+2. **Branch** from `develop`
+3. **Build** with full 5-layer changes
+4. **Test** (unit + integration + e2e)
+5. **Document** (README updates)
+6. **Submit** PR with detailed description
+7. **Code review** (2+ approvals required)
+8. **Merge** to develop, then main
+
+### Commit Convention
+
+```
+<type>(<scope>): <subject>
+
+feat(agents): add memory persistence to SDR agent
+fix(automation): handle workflow errors gracefully
+docs(api): update endpoint documentation
+test(commander): add scaling tests
+chore(deps): upgrade dependencies
+```
+
+---
+
+## 📞 Support
+
+- **Docs:** https://docs.jroc-os.dev
+- **Issues:** GitHub Issues
+- **Discussions:** GitHub Discussions
+- **Discord:** Join our community
+- **Email:** support@jroc-os.dev
+
+---
+
+## 📜 License
+
+MIT License - See LICENSE file for details
+
+---
+
+## 🎯 Milestones
+
+| Date | Milestone | Status |
+|------|-----------|--------|
+| Dec 2024 | v4.0 Release | ✅ Complete |
+| Jan 2025 | v5.0 AI Employees | 🔄 In Progress |
+| Feb 2025 | v6.0 Automation | 📅 Planned |
+| Mar 2025 | v7.0 Portal | 📅 Planned |
+| Jun 2025 | Public Launch | 🎯 Target |
+
+---
+
+**Built with ❤️ for autonomous business operation**
+
+*Latest: v4.1.2 | Next: v5.0.0-beta*

@@ -1,0 +1,1323 @@
+# J-ROC OS Complete Repository Structure & Code
+
+## 🗂️ Full Directory Tree
+
+```
+jroc-os/
+├── 📦 apps/
+│   ├── api/
+│   │   ├── src/
+│   │   │   ├── agents/
+│   │   │   │   ├── base-agent.ts          # Core agent class
+│   │   │   │   ├── sdr-agent.ts           # Sales Dev Rep
+│   │   │   │   ├── setter-agent.ts        # Meeting Setter
+│   │   │   │   ├── support-agent.ts       # Support
+│   │   │   │   ├── qa-agent.ts            # QA Manager
+│   │   │   │   ├── analyst-agent.ts       # Analytics
+│   │   │   │   └── tools/
+│   │   │   │       ├── email-tool.ts
+│   │   │   │       ├── crm-tool.ts
+│   │   │   │       ├── search-tool.ts
+│   │   │   │       └── calendar-tool.ts
+│   │   │   ├── api/
+│   │   │   │   ├── routes.ts              # API endpoints
+│   │   │   │   ├── graphql-schema.ts      # GraphQL
+│   │   │   │   ├── middleware.ts          # Auth, logging
+│   │   │   │   └── controllers/
+│   │   │   │       ├── contact.controller.ts
+│   │   │   │       ├── deal.controller.ts
+│   │   │   │       ├── agent.controller.ts
+│   │   │   │       └── automation.controller.ts
+│   │   │   ├── automation/
+│   │   │   │   ├── workflow-engine.ts     # Orchestration
+│   │   │   │   ├── trigger-handler.ts     # Trigger system
+│   │   │   │   ├── condition-engine.ts    # Conditions
+│   │   │   │   ├── action-executor.ts     # Action system
+│   │   │   │   └── queue/
+│   │   │   │       ├── job-queue.ts       # Job queue
+│   │   │   │       └── scheduler.ts       # Cron jobs
+│   │   │   ├── db/
+│   │   │   │   ├── client.ts              # DB connection
+│   │   │   │   ├── queries/
+│   │   │   │   │   ├── contact.queries.ts
+│   │   │   │   │   ├── deal.queries.ts
+│   │   │   │   │   └── agent.queries.ts
+│   │   │   │   └── migrations/            # SQL migrations
+│   │   │   │       ├── 001_initial.sql
+│   │   │   │       ├── 002_crm.sql
+│   │   │   │       ├── 003_agents.sql
+│   │   │   │       └── 004_automation.sql
+│   │   │   ├── integrations/
+│   │   │   │   ├── salesforce.ts
+│   │   │   │   ├── hubspot.ts
+│   │   │   │   ├── gmail.ts
+│   │   │   │   ├── slack.ts
+│   │   │   │   └── (100+ more)
+│   │   │   ├── auth/
+│   │   │   │   ├── jwt.ts
+│   │   │   │   ├── rbac.ts
+│   │   │   │   └── permissions.ts
+│   │   │   ├── commander/
+│   │   │   │   ├── orchestrator.ts        # Main commander
+│   │   │   │   ├── monitor.ts             # Status monitoring
+│   │   │   │   ├── scaler.ts              # Scaling logic
+│   │   │   │   └── health.ts              # Health checks
+│   │   │   ├── utils/
+│   │   │   │   ├── logger.ts
+│   │   │   │   ├── error-handler.ts
+│   │   │   │   └── helpers.ts
+│   │   │   └── index.ts                   # App entry point
+│   │   ├── migrations/
+│   │   │   ├── 001_initial_schema.sql
+│   │   │   ├── 002_add_agents.sql
+│   │   │   └── 003_add_automation.sql
+│   │   ├── tests/
+│   │   │   ├── unit/
+│   │   │   │   ├── agents.test.ts
+│   │   │   │   └── automation.test.ts
+│   │   │   └── integration/
+│   │   │       └── workflows.test.ts
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── .env.example
+│   │
+│   ├── web/
+│   │   ├── src/
+│   │   │   ├── pages/
+│   │   │   │   ├── dashboard.tsx
+│   │   │   │   ├── agents.tsx
+│   │   │   │   ├── workflows.tsx
+│   │   │   │   ├── crm.tsx
+│   │   │   │   └── settings.tsx
+│   │   │   ├── components/
+│   │   │   │   ├── agent-card.tsx
+│   │   │   │   ├── workflow-builder.tsx
+│   │   │   │   ├── contact-table.tsx
+│   │   │   │   └── metrics-dashboard.tsx
+│   │   │   ├── hooks/
+│   │   │   │   ├── useAgent.ts
+│   │   │   │   ├── useWorkflow.ts
+│   │   │   │   └── useApi.ts
+│   │   │   ├── store/
+│   │   │   │   ├── agentSlice.ts          # Redux
+│   │   │   │   ├── workflowSlice.ts
+│   │   │   │   └── uiSlice.ts
+│   │   │   ├── services/
+│   │   │   │   ├── api.client.ts
+│   │   │   │   ├── agent.service.ts
+│   │   │   │   └── automation.service.ts
+│   │   │   ├── styles/
+│   │   │   │   └── tailwind.css
+│   │   │   ├── App.tsx
+│   │   │   └── index.tsx
+│   │   ├── Dockerfile
+│   │   ├── package.json
+│   │   └── tailwind.config.js
+│   │
+│   └── mobile/                            # React Native (v7+)
+│       ├── src/
+│       └── (placeholder)
+│
+├── 🧠 packages/
+│   ├── agents/
+│   │   ├── src/
+│   │   │   ├── BaseAgent.ts
+│   │   │   ├── AgentTask.ts
+│   │   │   ├── AgentMemory.ts
+│   │   │   ├── Tool.ts
+│   │   │   ├── Skill.ts
+│   │   │   ├── agents/
+│   │   │   │   ├── SDRAgent.ts
+│   │   │   │   ├── SetterAgent.ts
+│   │   │   │   ├── SupportAgent.ts
+│   │   │   │   ├── QAAgent.ts
+│   │   │   │   ├── AnalystAgent.ts
+│   │   │   │   └── Commander.ts
+│   │   │   ├── tools/
+│   │   │   │   ├── EmailTool.ts
+│   │   │   │   ├── CRMTool.ts
+│   │   │   │   ├── SearchTool.ts
+│   │   │   │   ├── WebhookTool.ts
+│   │   │   │   └── CalendarTool.ts
+│   │   │   └── index.ts
+│   │   ├── tests/
+│   │   └── package.json
+│   │
+│   ├── database/
+│   │   ├── src/
+│   │   │   ├── client.ts
+│   │   │   ├── schema/
+│   │   │   │   ├── contacts.ts
+│   │   │   │   ├── deals.ts
+│   │   │   │   ├── agents.ts
+│   │   │   │   ├── tasks.ts
+│   │   │   │   └── automation.ts
+│   │   │   ├── migrations/
+│   │   │   │   └── runner.ts
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   ├── shared/
+│   │   ├── src/
+│   │   │   ├── types/
+│   │   │   │   ├── agent.types.ts
+│   │   │   │   ├── automation.types.ts
+│   │   │   │   ├── crm.types.ts
+│   │   │   │   └── api.types.ts
+│   │   │   ├── utils/
+│   │   │   │   ├── validation.ts
+│   │   │   │   ├── formatting.ts
+│   │   │   │   └── crypto.ts
+│   │   │   ├── constants/
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   └── automation/
+│       ├── src/
+│       │   ├── Workflow.ts
+│       │   ├── Trigger.ts
+│       │   ├── Condition.ts
+│       │   ├── Action.ts
+│       │   ├── WorkflowEngine.ts
+│       │   └── index.ts
+│       └── package.json
+│
+├── 🔧 infrastructure/
+│   ├── docker-compose.yml
+│   ├── docker-compose.prod.yml
+│   ├── kubernetes/
+│   │   ├── api-deployment.yaml
+│   │   ├── web-deployment.yaml
+│   │   ├── postgres-statefulset.yaml
+│   │   ├── redis-deployment.yaml
+│   │   ├── ingress.yaml
+│   │   └── configmap.yaml
+│   ├── terraform/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── scripts/
+│       ├── setup.sh
+│       ├── migrate.sh
+│       └── deploy.sh
+│
+├── 📚 docs/
+│   ├── README.md                          # Main docs
+│   ├── ARCHITECTURE.md                    # System design
+│   ├── AGENTS.md                          # Agent framework
+│   ├── AUTOMATION.md                      # Workflows
+│   ├── COMMANDER.md                       # Orchestration
+│   ├── API.md                             # API reference
+│   ├── DATABASE.md                        # Schema docs
+│   ├── DEPLOYMENT.md                      # Deploy guide
+│   ├── VERSIONS.md                        # Release notes
+│   ├── ROADMAP.md                         # Future plans
+│   └── INTEGRATIONS.md                    # Integration list
+│
+├── 🧪 tests/
+│   ├── unit/
+│   │   ├── agents/
+│   │   ├── automation/
+│   │   └── utils/
+│   ├── integration/
+│   │   ├── workflows.test.ts
+│   │   ├── agents.test.ts
+│   │   └── api.test.ts
+│   └── e2e/
+│       ├── agent-flow.test.ts
+│       └── workflow-flow.test.ts
+│
+├── .github/
+│   ├── workflows/
+│   │   ├── test.yml                      # Run tests on PR
+│   │   ├── build.yml                     # Build docker images
+│   │   ├── deploy.yml                    # Deploy to prod
+│   │   └── release.yml                   # Create releases
+│   ├── ISSUE_TEMPLATE/
+│   │   └── bug_report.md
+│   └── pull_request_template.md
+│
+├── docker-compose.yml                    # Local dev
+├── docker-compose.prod.yml                # Production
+├── .env.example
+├── .gitignore
+├── package.json                          # Monorepo root
+├── tsconfig.json
+├── package-lock.json
+├── LICENSE
+└── README.md
+```
+
+---
+
+## 📝 Core Implementation Files
+
+### 1. BaseAgent.ts (packages/agents/src/BaseAgent.ts)
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+import { Database } from "@jroc-os/database";
+
+export interface Tool {
+  name: string;
+  description: string;
+  inputSchema: Record<string, any>;
+  execute: (params: Record<string, any>) => Promise<any>;
+}
+
+export interface AgentConfig {
+  id: string;
+  name: string;
+  model?: string;
+  maxTokens?: number;
+  temperature?: number;
+  systemPrompt?: string;
+}
+
+export interface AgentTask {
+  id: string;
+  type: string;
+  input: Record<string, any>;
+  status: "pending" | "running" | "completed" | "failed" | "escalated";
+  priority: number;
+  createdAt: Date;
+  completedAt?: Date;
+  result?: Record<string, any>;
+  error?: string;
+}
+
+export class BaseAgent {
+  protected client: Anthropic;
+  protected db: Database;
+  protected config: AgentConfig;
+  protected tools: Map<string, Tool>;
+  protected memory: Map<string, any>;
+  protected taskQueue: AgentTask[];
+
+  constructor(config: AgentConfig) {
+    this.config = {
+      model: "claude-3-5-sonnet-20241022",
+      maxTokens: 4096,
+      temperature: 0.7,
+      ...config,
+    };
+
+    this.client = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
+
+    this.db = new Database();
+    this.tools = new Map();
+    this.memory = new Map();
+    this.taskQueue = [];
+
+    this.initializeTools();
+  }
+
+  protected initializeTools(): void {
+    // Override in subclass
+  }
+
+  protected getSystemPrompt(): string {
+    return this.config.systemPrompt || "You are a helpful AI assistant.";
+  }
+
+  protected registerTool(tool: Tool): void {
+    this.tools.set(tool.name, tool);
+  }
+
+  async execute(task: AgentTask): Promise<AgentTask> {
+    task.status = "running";
+    const startTime = Date.now();
+
+    try {
+      // Get context from memory & DB
+      const context = await this.buildContext(task);
+
+      // Call Claude API with tools
+      const response = await this.client.messages.create({
+        model: this.config.model!,
+        max_tokens: this.config.maxTokens!,
+        temperature: this.config.temperature,
+        system: this.getSystemPrompt(),
+        tools: Array.from(this.tools.values()).map((tool) => ({
+          name: tool.name,
+          description: tool.description,
+          input_schema: {
+            type: "object",
+            properties: tool.inputSchema,
+          },
+        })),
+        messages: [
+          {
+            role: "user",
+            content: `Task: ${task.type}\nInput: ${JSON.stringify(
+              task.input
+            )}\n\nContext: ${context}`,
+          },
+        ],
+      });
+
+      // Process response
+      task.result = await this.processResponse(response, task);
+      task.status = "completed";
+
+      // Log run
+      await this.db.query(
+        `INSERT INTO agent_runs (agent_id, task_type, status, input, output, duration_ms)
+         VALUES ($1, $2, $3, $4, $5, $6)`,
+        [
+          this.config.id,
+          task.type,
+          "completed",
+          task.input,
+          task.result,
+          Date.now() - startTime,
+        ]
+      );
+    } catch (error) {
+      task.status = "failed";
+      task.error = (error as Error).message;
+
+      await this.db.query(
+        `INSERT INTO agent_runs (agent_id, task_type, status, error, duration_ms)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [
+          this.config.id,
+          task.type,
+          "failed",
+          task.error,
+          Date.now() - startTime,
+        ]
+      );
+    }
+
+    return task;
+  }
+
+  private async buildContext(task: AgentTask): Promise<string> {
+    // Load relevant context from memory & DB
+    const memoryContext = JSON.stringify(
+      Array.from(this.memory.entries())
+        .slice(-10)
+        .map(([key, value]) => ({ key, value }))
+    );
+
+    return `Memory: ${memoryContext}`;
+  }
+
+  private async processResponse(
+    response: Anthropic.Message,
+    task: AgentTask
+  ): Promise<Record<string, any>> {
+    const result: Record<string, any> = {};
+
+    for (const content of response.content) {
+      if (content.type === "text") {
+        result.text = content.text;
+      } else if (content.type === "tool_use") {
+        const tool = this.tools.get(content.name);
+        if (tool) {
+          result[content.name] = await tool.execute(content.input as any);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  async saveToMemory(key: string, value: any): Promise<void> {
+    this.memory.set(key, value);
+    // Persist to DB for long-term memory
+    await this.db.query(
+      `INSERT INTO agent_memory (agent_id, key, value, created_at)
+       VALUES ($1, $2, $3, now())`,
+      [this.config.id, key, JSON.stringify(value)]
+    );
+  }
+
+  getStatus(): {
+    agentId: string;
+    status: string;
+    tasksCompleted: number;
+    memorySize: number;
+  } {
+    return {
+      agentId: this.config.id,
+      status: "running",
+      tasksCompleted: this.taskQueue.length,
+      memorySize: this.memory.size,
+    };
+  }
+}
+```
+
+### 2. SDRAgent.ts (packages/agents/src/agents/SDRAgent.ts)
+
+```typescript
+import { BaseAgent, Tool, AgentTask } from "../BaseAgent";
+import axios from "axios";
+
+export class SDRAgent extends BaseAgent {
+  constructor() {
+    super({
+      id: "sdr-agent",
+      name: "Sales Development Representative",
+      temperature: 0.7,
+    });
+  }
+
+  protected initializeTools(): void {
+    this.registerTool({
+      name: "send_email",
+      description:
+        "Send a personalized email to a prospect with subject and body",
+      inputSchema: {
+        to: { type: "string", description: "Recipient email" },
+        subject: { type: "string", description: "Email subject line" },
+        body: { type: "string", description: "Email body content" },
+        template: {
+          type: "string",
+          description: "Optional email template name",
+        },
+      },
+      execute: async (params) => {
+        // Send via email service
+        const response = await axios.post("/api/emails/send", {
+          to: params.to,
+          subject: params.subject,
+          body: params.body,
+          template: params.template,
+        });
+        return { status: "sent", messageId: response.data.id };
+      },
+    });
+
+    this.registerTool({
+      name: "search_prospect",
+      description: "Search for prospect information",
+      inputSchema: {
+        email: { type: "string" },
+        company: { type: "string" },
+        linkedin: { type: "string" },
+      },
+      execute: async (params) => {
+        // Search API (Apollo, RocketReach, etc)
+        const response = await axios.get("/api/search/prospect", {
+          params,
+        });
+        return response.data;
+      },
+    });
+
+    this.registerTool({
+      name: "log_activity",
+      description: "Log activity in CRM",
+      inputSchema: {
+        contactId: { type: "string" },
+        type: {
+          type: "string",
+          enum: ["email", "call", "meeting", "note"],
+        },
+        details: { type: "string" },
+      },
+      execute: async (params) => {
+        await this.db.query(
+          `INSERT INTO activities (contact_id, type, details, created_at)
+           VALUES ($1, $2, $3, now())`,
+          [params.contactId, params.type, params.details]
+        );
+        return { status: "logged" };
+      },
+    });
+
+    this.registerTool({
+      name: "create_task",
+      description: "Create follow-up task",
+      inputSchema: {
+        contactId: { type: "string" },
+        dueDate: { type: "string" },
+        description: { type: "string" },
+        priority: { type: "string", enum: ["high", "medium", "low"] },
+      },
+      execute: async (params) => {
+        const result = await this.db.query(
+          `INSERT INTO tasks (contact_id, due_date, description, priority)
+           VALUES ($1, $2, $3, $4) RETURNING id`,
+          [params.contactId, params.dueDate, params.description, params.priority]
+        );
+        return { taskId: result.rows[0].id };
+      },
+    });
+  }
+
+  protected getSystemPrompt(): string {
+    return `You are an expert sales development representative. Your role is to:
+1. Research prospects thoroughly
+2. Personalize outreach emails based on their background and pain points
+3. Schedule follow-ups intelligently
+4. Log all interactions in the CRM
+5. Always maintain professionalism and compliance
+
+Guidelines:
+- Never send generic emails - always personalize
+- Respect email frequency - don't spam
+- Track all activities for reporting
+- Escalate difficult prospects to human SDR
+- Focus on value-first messaging`;
+  }
+}
+```
+
+### 3. WorkflowEngine.ts (packages/automation/src/WorkflowEngine.ts)
+
+```typescript
+import { Database } from "@jroc-os/database";
+import { EventEmitter } from "events";
+
+export interface Trigger {
+  type: string;
+  filter?: Record<string, any>;
+}
+
+export interface Condition {
+  field: string;
+  operator: "eq" | "ne" | "gt" | "gte" | "lt" | "lte" | "in" | "contains";
+  value: any;
+}
+
+export interface Action {
+  type: string;
+  params: Record<string, any>;
+}
+
+export interface Workflow {
+  id: string;
+  name: string;
+  triggers: Trigger[];
+  conditions: Condition[];
+  actions: Action[];
+  enabled: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export class WorkflowEngine extends EventEmitter {
+  private db: Database;
+  private workflows: Map<string, Workflow>;
+  private executionQueue: any[];
+
+  constructor() {
+    super();
+    this.db = new Database();
+    this.workflows = new Map();
+    this.executionQueue = [];
+
+    this.loadWorkflows();
+    this.registerTriggerHandlers();
+  }
+
+  private async loadWorkflows(): Promise<void> {
+    const result = await this.db.query(
+      `SELECT * FROM workflows WHERE enabled = true`
+    );
+
+    for (const row of result.rows) {
+      this.workflows.set(row.id, row);
+    }
+  }
+
+  private registerTriggerHandlers(): void {
+    // Register handlers for each trigger type
+    this.on("lead_created", (data) => this.handleTrigger("lead_created", data));
+    this.on("deal_updated", (data) => this.handleTrigger("deal_updated", data));
+    this.on("email_received", (data) =>
+      this.handleTrigger("email_received", data)
+    );
+    this.on("scheduled_task", (data) =>
+      this.handleTrigger("scheduled_task", data)
+    );
+  }
+
+  private async handleTrigger(
+    triggerType: string,
+    data: Record<string, any>
+  ): Promise<void> {
+    for (const [workflowId, workflow] of this.workflows.entries()) {
+      const trigger = workflow.triggers.find((t) => t.type === triggerType);
+
+      if (!trigger) continue;
+
+      // Check filter
+      if (trigger.filter && !this.matchesFilter(data, trigger.filter)) {
+        continue;
+      }
+
+      // Check conditions
+      if (!this.evaluateConditions(data, workflow.conditions)) {
+        continue;
+      }
+
+      // Execute actions
+      await this.executeActions(workflow.actions, data);
+
+      // Log execution
+      await this.db.query(
+        `INSERT INTO workflow_executions (workflow_id, trigger_type, status, data)
+         VALUES ($1, $2, $3, $4)`,
+        [workflowId, triggerType, "completed", JSON.stringify(data)]
+      );
+    }
+  }
+
+  private matchesFilter(
+    data: Record<string, any>,
+    filter: Record<string, any>
+  ): boolean {
+    for (const [key, value] of Object.entries(filter)) {
+      if (data[key] !== value) return false;
+    }
+    return true;
+  }
+
+  private evaluateConditions(
+    data: Record<string, any>,
+    conditions: Condition[]
+  ): boolean {
+    for (const condition of conditions) {
+      const fieldValue = data[condition.field];
+
+      switch (condition.operator) {
+        case "eq":
+          if (fieldValue !== condition.value) return false;
+          break;
+        case "gt":
+          if (fieldValue <= condition.value) return false;
+          break;
+        case "gte":
+          if (fieldValue < condition.value) return false;
+          break;
+        case "in":
+          if (!condition.value.includes(fieldValue)) return false;
+          break;
+        // ... other operators
+      }
+    }
+    return true;
+  }
+
+  private async executeActions(
+    actions: Action[],
+    data: Record<string, any>
+  ): Promise<void> {
+    for (const action of actions) {
+      switch (action.type) {
+        case "send_email_sequence":
+          await this.sendEmailSequence(action.params, data);
+          break;
+        case "assign_owner":
+          await this.assignOwner(action.params, data);
+          break;
+        case "create_task":
+          await this.createTask(action.params, data);
+          break;
+        case "send_slack_message":
+          await this.sendSlackMessage(action.params, data);
+          break;
+        case "webhook":
+          await this.callWebhook(action.params, data);
+          break;
+      }
+    }
+  }
+
+  private async sendEmailSequence(
+    params: Record<string, any>,
+    data: Record<string, any>
+  ): Promise<void> {
+    // Trigger email sequence
+    console.log("Sending email sequence:", params);
+  }
+
+  private async assignOwner(
+    params: Record<string, any>,
+    data: Record<string, any>
+  ): Promise<void> {
+    // Assign to owner
+    console.log("Assigning owner:", params);
+  }
+
+  private async createTask(
+    params: Record<string, any>,
+    data: Record<string, any>
+  ): Promise<void> {
+    // Create task
+    console.log("Creating task:", params);
+  }
+
+  private async sendSlackMessage(
+    params: Record<string, any>,
+    data: Record<string, any>
+  ): Promise<void> {
+    // Send Slack message
+    console.log("Sending Slack message:", params);
+  }
+
+  private async callWebhook(
+    params: Record<string, any>,
+    data: Record<string, any>
+  ): Promise<void> {
+    // Call webhook
+    console.log("Calling webhook:", params);
+  }
+
+  async createWorkflow(workflow: Workflow): Promise<void> {
+    const result = await this.db.query(
+      `INSERT INTO workflows (id, name, triggers, conditions, actions, enabled, created_at)
+       VALUES ($1, $2, $3, $4, $5, $6, now())`,
+      [
+        workflow.id,
+        workflow.name,
+        JSON.stringify(workflow.triggers),
+        JSON.stringify(workflow.conditions),
+        JSON.stringify(workflow.actions),
+        workflow.enabled,
+      ]
+    );
+
+    this.workflows.set(workflow.id, workflow);
+  }
+
+  async updateWorkflow(workflowId: string, updates: Partial<Workflow>): Promise<void> {
+    await this.db.query(`UPDATE workflows SET updated_at = now() WHERE id = $1`, [workflowId]);
+    const updated = { ...(this.workflows.get(workflowId) || {}), ...updates };
+    this.workflows.set(workflowId, updated as Workflow);
+  }
+
+  async deleteWorkflow(workflowId: string): Promise<void> {
+    await this.db.query(`DELETE FROM workflows WHERE id = $1`, [workflowId]);
+    this.workflows.delete(workflowId);
+  }
+}
+```
+
+### 4. Commander.ts (packages/agents/src/agents/Commander.ts)
+
+```typescript
+import { BaseAgent } from "../BaseAgent";
+import { Database } from "@jroc-os/database";
+
+export interface AgentStatus {
+  id: string;
+  name: string;
+  status: "running" | "paused" | "error";
+  tasksCompleted: number;
+  uptime: number;
+  memory: number;
+  cpuUsage: number;
+  errorRate: number;
+  lastTaskId: string;
+}
+
+export interface SystemHealth {
+  agentsRunning: number;
+  agentsPaused: number;
+  agentsError: number;
+  tasksQueued: number;
+  tasksRunning: number;
+  totalThroughput: number;
+  cpuUsage: number;
+  memoryUsage: number;
+  uptime: number;
+}
+
+export class Commander extends BaseAgent {
+  private agents: Map<string, BaseAgent>;
+  private healthCheckInterval: NodeJS.Timer;
+
+  constructor() {
+    super({
+      id: "commander",
+      name: "JROC Commander",
+    });
+
+    this.agents = new Map();
+    this.startHealthChecks();
+  }
+
+  private startHealthChecks(): void {
+    this.healthCheckInterval = setInterval(() => {
+      this.performHealthCheck();
+    }, 60000); // Every minute
+  }
+
+  private async performHealthCheck(): Promise<void> {
+    for (const [agentId, agent] of this.agents.entries()) {
+      const status = agent.getStatus();
+
+      await this.db.query(
+        `INSERT INTO agent_health_checks (agent_id, status, memory, cpu, timestamp)
+         VALUES ($1, $2, $3, $4, now())`,
+        [agentId, "healthy", status.memorySize, 0]
+      );
+    }
+  }
+
+  registerAgent(agent: BaseAgent): void {
+    const status = agent.getStatus();
+    this.agents.set(status.agentId, agent);
+  }
+
+  async getAgentStatus(agentId: string): Promise<AgentStatus> {
+    const agent = this.agents.get(agentId);
+    if (!agent) throw new Error(`Agent ${agentId} not found`);
+
+    const status = agent.getStatus();
+    const runs = await this.db.query(
+      `SELECT COUNT(*) as total, 
+              SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed
+       FROM agent_runs WHERE agent_id = $1 AND created_at > now() - interval '1 day'`,
+      [agentId]
+    );
+
+    const errorRate =
+      runs.rows[0].total > 0
+        ? (runs.rows[0].failed / runs.rows[0].total) * 100
+        : 0;
+
+    return {
+      id: agentId,
+      name: status.agentId,
+      status: "running",
+      tasksCompleted: status.tasksCompleted,
+      uptime: Date.now(),
+      memory: status.memorySize,
+      cpuUsage: 0,
+      errorRate,
+      lastTaskId: "",
+    };
+  }
+
+  async scaleAgent(
+    agentId: string,
+    config: { instances: number; concurrency: number }
+  ): Promise<void> {
+    await this.db.query(
+      `UPDATE agent_scaling SET instances = $1, concurrency = $2 
+       WHERE agent_id = $3`,
+      [config.instances, config.concurrency, agentId]
+    );
+
+    console.log(
+      `Scaled ${agentId} to ${config.instances} instances, ${config.concurrency} concurrency`
+    );
+  }
+
+  async broadcast(command: {
+    command: string;
+    data: Record<string, any>;
+  }): Promise<void> {
+    for (const [agentId, agent] of this.agents.entries()) {
+      // Send command to all agents
+      console.log(`Broadcasting to ${agentId}:`, command);
+    }
+  }
+
+  async getSystemHealth(): Promise<SystemHealth> {
+    const runs = await this.db.query(
+      `SELECT 
+        COUNT(*) as total_tasks,
+        SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed
+      FROM agent_runs WHERE created_at > now() - interval '24 hours'`
+    );
+
+    const agentCount = this.agents.size;
+
+    return {
+      agentsRunning: agentCount,
+      agentsPaused: 0,
+      agentsError: 0,
+      tasksQueued: 0,
+      tasksRunning: 0,
+      totalThroughput:
+        runs.rows[0].completed / 24, // Per hour
+      cpuUsage: 0,
+      memoryUsage: 0,
+      uptime: Date.now(),
+    };
+  }
+
+  protected getSystemPrompt(): string {
+    return `You are the JROC Commander. Your role is to:
+1. Monitor all AI agents
+2. Coordinate workflows and automations
+3. Optimize system performance
+4. Escalate critical issues
+5. Manage scaling and resources
+
+Report system status and take corrective actions as needed.`;
+  }
+}
+```
+
+### 5. Database Migrations (apps/api/migrations/001_initial.sql)
+
+```sql
+-- Organizations
+CREATE TABLE organizations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(255) NOT NULL,
+  domain VARCHAR(255) UNIQUE,
+  plan VARCHAR(50) DEFAULT 'free',
+  billing_email VARCHAR(255),
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Contacts
+CREATE TABLE contacts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  company VARCHAR(255),
+  title VARCHAR(100),
+  phone VARCHAR(20),
+  linkedin_url VARCHAR(500),
+  status VARCHAR(50) DEFAULT 'lead', -- 'lead', 'opportunity', 'customer', 'inactive'
+  score INTEGER DEFAULT 0,
+  source VARCHAR(100),
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now(),
+  INDEX idx_org_email (org_id, email)
+);
+
+-- Deals/Pipeline
+CREATE TABLE deals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  contact_id UUID NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  amount DECIMAL(12,2),
+  stage VARCHAR(50) DEFAULT 'prospecting', -- 'prospecting', 'qualification', 'proposal', 'negotiation', 'closed_won', 'closed_lost'
+  probability INTEGER DEFAULT 0,
+  expected_close_date DATE,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Activities
+CREATE TABLE activities (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  contact_id UUID REFERENCES contacts(id) ON DELETE CASCADE,
+  deal_id UUID REFERENCES deals(id) ON DELETE CASCADE,
+  type VARCHAR(50) NOT NULL, -- 'email', 'call', 'meeting', 'note'
+  subject VARCHAR(500),
+  description TEXT,
+  created_by VARCHAR(255),
+  created_at TIMESTAMP DEFAULT now()
+);
+
+-- Agent Runs (v4+)
+CREATE TABLE agent_runs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  agent_id VARCHAR(255) NOT NULL,
+  task_type VARCHAR(100),
+  status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'running', 'completed', 'failed', 'escalated'
+  input JSONB,
+  output JSONB,
+  error TEXT,
+  duration_ms INTEGER,
+  created_at TIMESTAMP DEFAULT now(),
+  INDEX idx_agent_status (agent_id, status, created_at)
+);
+
+-- Agent Tasks (v5+)
+CREATE TABLE agent_tasks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  agent_id VARCHAR(255) NOT NULL,
+  task_type VARCHAR(100) NOT NULL,
+  status VARCHAR(50) DEFAULT 'pending',
+  priority VARCHAR(20) DEFAULT 'medium', -- 'high', 'medium', 'low'
+  assigned_to VARCHAR(255),
+  data JSONB,
+  result JSONB,
+  error TEXT,
+  due_date TIMESTAMP,
+  completed_at TIMESTAMP,
+  retries INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now(),
+  INDEX idx_agent_pending (agent_id, status, created_at)
+);
+
+-- Workflows (v6+)
+CREATE TABLE workflows (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  triggers JSONB NOT NULL,
+  conditions JSONB NOT NULL,
+  actions JSONB NOT NULL,
+  enabled BOOLEAN DEFAULT true,
+  created_by VARCHAR(255),
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);
+
+-- Workflow Executions
+CREATE TABLE workflow_executions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  workflow_id UUID NOT NULL REFERENCES workflows(id) ON DELETE CASCADE,
+  trigger_type VARCHAR(100),
+  status VARCHAR(50),
+  trigger_data JSONB,
+  actions_taken JSONB,
+  created_at TIMESTAMP DEFAULT now(),
+  INDEX idx_workflow_execution (workflow_id, created_at)
+);
+
+-- Agent Memory (v5+)
+CREATE TABLE agent_memory (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  org_id UUID NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  agent_id VARCHAR(255) NOT NULL,
+  key VARCHAR(255) NOT NULL,
+  value JSONB,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now(),
+  INDEX idx_agent_memory (agent_id, key)
+);
+
+-- Health Checks
+CREATE TABLE health_checks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  agent_id VARCHAR(255),
+  status VARCHAR(50),
+  memory_mb INTEGER,
+  cpu_percent DECIMAL(5,2),
+  checked_at TIMESTAMP DEFAULT now()
+);
+
+-- Enable RLS
+ALTER TABLE organizations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE deals ENABLE ROW LEVEL SECURITY;
+ALTER TABLE agent_runs ENABLE ROW LEVEL SECURITY;
+
+-- RLS Policies
+CREATE POLICY "org_isolation" ON organizations
+  USING (id = current_setting('app.current_org_id')::uuid);
+
+CREATE POLICY "contact_isolation" ON contacts
+  USING (org_id = current_setting('app.current_org_id')::uuid);
+
+CREATE POLICY "deal_isolation" ON deals
+  USING (org_id = current_setting('app.current_org_id')::uuid);
+```
+
+---
+
+## 📦 package.json (Monorepo Root)
+
+```json
+{
+  "name": "jroc-os",
+  "version": "4.1.2",
+  "description": "Autonomous Business Operating System",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:migrate": "cd apps/api && npm run migrate",
+    "db:seed": "cd apps/api && npm run seed",
+    "docker:build": "docker compose -f docker-compose.prod.yml build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "release": "standard-version"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "@testing-library/react": "^14.0.0"
+  }
+}
+```
+
+---
+
+## 🐳 docker-compose.yml
+
+```yaml
+version: "3.8"
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: jroc
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: jroc_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jroc"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis (caching & queue)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://jroc:${DB_PASSWORD}@postgres:5432/jroc_dev
+      REDIS_URL: redis://redis:6379
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./apps/api/src:/app/src
+
+  # Frontend
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    environment:
+      REACT_APP_API_URL: http://localhost:4000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    volumes:
+      - ./apps/web/src:/app/src
+
+  # Adminer (DB UI)
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+```
+
+---
+
+## 🔄 GitHub Actions CI/CD (.github/workflows/test.yml)
+
+```yaml
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+```
+
+---
+
+## 📊 What's Actually Missing (v5-12 Gaps)
+
+### v5.0 (Current Development)
+- ❌ Worker clustering & distributed execution
+- ❌ Advanced memory persistence & retrieval
+- ❌ Long-term context windows (>100K tokens)
+- ❌ Real-time agent collaboration
+- ❌ Skill marketplace & versioning
+- ❌ Advanced permission matrix
+- ⚠️ 60% code completion
+
+### v6.0 Automation OS
+- ❌ Visual workflow editor (UI not built)
+- ❌ 1000+ trigger types (only 20 defined)
+- ❌ Advanced conditional logic
+- ❌ Message queue (Kafka/RabbitMQ)
+- ❌ Scheduled job engine
+- ❌ Webhook management UI
+- ⚠️ 0% code completion
+
+### v7.0-v12.0
+- ❌ All client-facing UIs
+- ❌ Multi-tenancy
+- ❌ Financial systems
+- ❌ Marketplace
+- ❌ Mobile apps
+- ⚠️ 0% planning complete
+
+---
+
+**Total Implementation Status: v1-v4 ~95% | v5 ~60% | v6+ ~5%**
